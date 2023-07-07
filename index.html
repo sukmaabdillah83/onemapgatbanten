@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1066px;
+            height: 579px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/CATlabuan_25_175_0.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.086341051210859,104.42221214267484],[-4.929232445468971,108.39996527354019]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_CATlabuan_25_175_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NamaCAT'] !== null ? autolinker.link(feature.properties['NamaCAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ZonKonsrvs'] !== null ? autolinker.link(feature.properties['ZonKonsrvs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Rekom'] !== null ? autolinker.link(feature.properties['Rekom'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CATlabuan_25_175_0_0(feature) {
+            switch(String(feature.properties['ZonKonsrvs'])) {
+                case 'Zona Aman':
+                    return {
+                pane: 'pane_CATlabuan_25_175_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(86,86,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Zona Imbuhan atau Resapan':
+                    return {
+                pane: 'pane_CATlabuan_25_175_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,87,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Zona Kritis':
+                    return {
+                pane: 'pane_CATlabuan_25_175_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(99,236,14,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Zona Rawan':
+                    return {
+                pane: 'pane_CATlabuan_25_175_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(64,225,193,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_CATlabuan_25_175_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,114,31,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CATlabuan_25_175_0');
+        map.getPane('pane_CATlabuan_25_175_0').style.zIndex = 400;
+        map.getPane('pane_CATlabuan_25_175_0').style['mix-blend-mode'] = 'normal';
+        var layer_CATlabuan_25_175_0 = new L.geoJson(json_CATlabuan_25_175_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CATlabuan_25_175_0',
+            layerName: 'layer_CATlabuan_25_175_0',
+            pane: 'pane_CATlabuan_25_175_0',
+            onEachFeature: pop_CATlabuan_25_175_0,
+            style: style_CATlabuan_25_175_0_0,
+        });
+        bounds_group.addLayer(layer_CATlabuan_25_175_0);
+        map.addLayer(layer_CATlabuan_25_175_0);
+        setBounds();
+        </script>
+    </body>
+</html>
